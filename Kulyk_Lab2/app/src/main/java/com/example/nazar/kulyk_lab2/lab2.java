@@ -12,16 +12,18 @@ import static com.example.nazar.kulyk_lab2.R.*;
 
 public class lab2 extends AppCompatActivity {
 
-    TextView result;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(layout.activity_lab2);
 
+        onClickButtonsHandler();
+    }
+
+    public void onClickButtonsHandler(){
         final TextView result = findViewById(id.result);
         final Button submitButton = findViewById(id.submitButton);
-        final EditText editText = findViewById(id.editText);
+        final EditText editText = findViewById(id.text);
 
         submitButton.setOnClickListener(new View.OnClickListener() {
 
@@ -32,12 +34,12 @@ public class lab2 extends AppCompatActivity {
                 if (name.equals("")) {
                     result.setText("Please write your name");
                 } else {
-                    result.setText("Hello " + name);
+                    result.setText("Hello " + name + "!");
                 }
             }
         });
 
-        final Button clearButton = findViewById(id.clearButton);
+        final Button clearButton = findViewById(id.btn_clear);
 
         clearButton.setOnClickListener(new View.OnClickListener() {
             @Override
