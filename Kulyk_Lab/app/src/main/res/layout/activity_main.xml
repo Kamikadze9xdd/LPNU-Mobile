@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_screen"
     android:layout_width="match_parent"
@@ -14,54 +13,98 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
-        <FrameLayout
+
+        <EditText
+            android:id="@+id/first_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginTop="48dp"
-            >
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:hint="@string/input_your_first_name_here"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="#ff0000" />
 
-            <EditText
-                android:id="@+id/text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/input_your_name_here"
-                android:inputType="text"
-                android:singleLine="true"
-                android:textColor="#ff0000" />
 
-            <Button
-                android:id="@+id/btn_clear"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:background="@android:drawable/btn_dialog"
-                android:visibility="visible" />
-        </FrameLayout>
+        <EditText
+            android:id="@+id/last_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/input_your_last_name_here"
+            android:inputType="text"
+            android:singleLine="true"
+            android:textColor="#ff0000" />
 
+        <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/input_your_email_here"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:textColor="#ff0000" />
+
+        <EditText
+            android:id="@+id/phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/input_your_phone_here"
+            android:inputType="phone"
+            android:singleLine="true"
+            android:textColor="#ff0000" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/input_your_password_here"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="#ff0000" />
+
+        <EditText
+            android:id="@+id/confirm_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:hint="@string/input_password_confirmation_here"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColor="#ff0000" />
 
         <Button
-            android:id="@+id/submitButton"
+            android:id="@+id/submit_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
             android:text="@string/submit" />
-
 
         <TextView
             android:id="@+id/result"
             android:layout_width="match_parent"
             android:layout_height="64dp"
             android:layout_marginBottom="343dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"/>
+            android:layout_marginTop="10dp" />
 
     </LinearLayout>
 

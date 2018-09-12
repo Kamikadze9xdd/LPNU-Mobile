@@ -19,31 +19,35 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickButtonsHandler(){
+        final Button submit_button = findViewById(R.id.submit_button);
+        final EditText first_name = findViewById(R.id.first_name);
+        final EditText last_name = findViewById(R.id.last_name);
         final TextView result = findViewById(R.id.result);
-        final Button submitButton = findViewById(R.id.submitButton);
-        final EditText editText = findViewById(R.id.text);
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
+        submit_button.setOnClickListener(new View.OnClickListener() {
 
             @Override
             @SuppressLint("SetTextI18n")
             public void onClick(View v) {
-                String name = String.valueOf(editText.getText());
-                if (name.equals("")) {
-                    result.setText("Please write your name");
-                } else {
-                    result.setText("Hello " + name + "!");
-                }
+                String first_name_value = String.valueOf(first_name.getText());
+                NameValidator(first_name_value, "first Name");
+                String last_name_value = String.valueOf(last_name.getText());
+                NameValidator(last_name_value, "last name");
             }
         });
 
-        final Button clearButton = findViewById(R.id.btn_clear);
+    }
 
-        clearButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editText.setText("");
-            }
-        });
+    public void NameValidator(String value, String field){
+        final TextView result = findViewById(R.id.result);
+        
+        if(value.equals("")){
+            String text = String.valueOf(result.getText()) + "\nEmpty " + field;
+            result.setText(text);
+        }
+        else if(!(value.matches("[a-zA-Z]+"))){
+            String text = String.valueOf(result.getText()) + "\nIncorrect " + field;
+            result.setText(text);
+        }
     }
 }
