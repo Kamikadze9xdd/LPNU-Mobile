@@ -1,15 +1,17 @@
 package com.nazar.kulyk_lab.activities;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-<<<<<<< HEAD:Kulyk_Lab/app/src/main/java/com/nazar/kulyk_lab/activities/MainActivity.java
 import com.google.gson.Gson;
 import com.nazar.kulyk_lab.R;
 import com.nazar.kulyk_lab.models.UserModel;
@@ -21,7 +23,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String NAME_REGEX = "^[A-Z][a-zA-Z]+$";
     public static final String EMAIL_REGEX = "^[a-zA-Z0-9+_.-]+@[a-zA-Z]+\\.[A-Za-z]{2,4}$";
     public static final String PHONE_REGEX = "^\\+?[0-9]{10,16}$";
-    public static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
+    public static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
+            "(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
     protected TextView result;
     protected String text;
     protected EditText first_name;
@@ -32,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     protected EditText confirm_password;
     protected Button submit_button;
     protected Boolean validatorResult;
+    protected Button list_users_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,11 +50,19 @@ public class MainActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
         confirm_password = findViewById(R.id.confirm_password);
         submit_button = findViewById(R.id.submit_button);
+        list_users_button = findViewById(R.id.list_view_button);
         onSubmitButtonHandler();
         onListButtonHandler();
     }
-    public void onListButtonHandler(){
+    public void onListButtonHandler() {
+        list_users_button.setOnClickListener(new View.OnClickListener() {
 
+            @Override
+            public void onClick(View v) {
+                Intent user_list = new Intent(getBaseContext(), UserListActivity.class);
+                startActivity(user_list);
+            }
+        });
     }
 
     public void onSubmitButtonHandler() {
@@ -62,19 +74,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 result.setText("");
                 validatorResult = true;
-<<<<<<< HEAD:Kulyk_Lab/app/src/main/java/com/nazar/kulyk_lab/activities/MainActivity.java
-                StringValidator(first_name, "^[A-Z][a-zA-Z]+$", "first name");
-                StringValidator(last_name, "^[A-Z][a-zA-Z]+$", "last name");
-                StringValidator(email, "^[a-zA-Z0-9+_.-]+@[a-zA-Z]+\\.[A-Za-z]{2,4}$",
-                        "email");
-                StringValidator(phone, "^\\+?[0-9]{10,16}$", "phone");
-                StringValidator(password,
-                        "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{10,}$",
-                        "password");
-                PasswordsCheck();
-                if(validatorResult){
-                    saveUser();
-=======
                 StringValidator(first_name, NAME_REGEX, "first name");
                 StringValidator(last_name, NAME_REGEX, "last name");
                 StringValidator(email, EMAIL_REGEX, "email");
@@ -82,8 +81,8 @@ public class MainActivity extends AppCompatActivity {
                 StringValidator(password, PASSWORD_REGEX, "password");
                 PasswordsCheck();
                 if (validatorResult) {
->>>>>>> a048eacf2a4eda67a900a060d3bdc45c97b87b92:Kulyk_Lab/app/src/main/java/com/nazar/kulyk_lab/MainActivity.java
                     result.setText("All fields are ok");
+                    saveUser();
                 }
             }
         });
@@ -134,13 +133,15 @@ public class MainActivity extends AppCompatActivity {
 
         userArrayList.add(user);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("Shared preferences",
-                MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
         Gson gson = new Gson();
         String json = gson.toJson(userArrayList);
-        editor.putString("user list",json);
+        Log.i("users", json);
+        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
+                "user_list",
+                Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user_list",json);
         editor.apply();
     }
 }

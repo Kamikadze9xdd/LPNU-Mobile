@@ -19,6 +19,12 @@ public class UserModel {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return first_name + " " + last_name +
+                "\n" + phone;
+    }
+
     public String getFirst_name() {
         return first_name;
     }
