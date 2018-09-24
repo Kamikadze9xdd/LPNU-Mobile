@@ -20,10 +20,10 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     public ArrayList<UserModel> userArrayList;
-    public static final String NAME_REGEX = "^[A-Z][a-zA-Z]+$";
-    public static final String EMAIL_REGEX = "^[a-zA-Z0-9+_.-]+@[a-zA-Z]+\\.[A-Za-z]{2,4}$";
-    public static final String PHONE_REGEX = "^\\+?[0-9]{10,16}$";
-    public static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
+    private static final String NAME_REGEX = "^[A-Z][a-zA-Z]+$";
+    private static final String EMAIL_REGEX = "^[a-zA-Z0-9+_.-]+@[a-zA-Z]+\\.[A-Za-z]{2,4}$";
+    private static final String PHONE_REGEX = "^\\+?[0-9]{10,16}$";
+    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
             "(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
     protected TextView result;
     protected String text;
