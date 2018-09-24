@@ -30,19 +30,18 @@ public class UserListActivity extends AppCompatActivity{
         String jsonPreferences = sharedPref.getString("user_list", "");
         Log.i("users", jsonPreferences);
 
-        Type type = new TypeToken<List<UserModel>>() {}.getType();
-        listOfUsers = gson.fromJson(jsonPreferences, type);
-        Log.i("users", listOfUsers.toString());
+        if(!jsonPreferences.equals("")){
+            Type type = new TypeToken<List<UserModel>>() {}.getType();
+            listOfUsers = gson.fromJson(jsonPreferences, type);
+            Log.i("users", listOfUsers.toString());
 
-        ListView userListView = findViewById(R.id.list_view_users);
-        ArrayAdapter<UserModel> arrayAdapter = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                listOfUsers);
+            ListView userListView = findViewById(R.id.list_view_users);
+            ArrayAdapter<UserModel> arrayAdapter = new ArrayAdapter<>(
+                    this,
+                    android.R.layout.simple_list_item_1,
+                    listOfUsers);
 
-        userListView.setAdapter(arrayAdapter);
-
+            userListView.setAdapter(arrayAdapter);
+        }
     }
-
-
 }

@@ -74,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 result.setText("");
                 validatorResult = true;
-                StringValidator(first_name, NAME_REGEX, "first name");
-                StringValidator(last_name, NAME_REGEX, "last name");
-                StringValidator(email, EMAIL_REGEX, "email");
-                StringValidator(phone, PHONE_REGEX, "phone");
-                StringValidator(password, PASSWORD_REGEX, "password");
-                PasswordsCheck();
+                stringValidator(first_name, NAME_REGEX, "first name");
+                stringValidator(last_name, NAME_REGEX, "last name");
+                stringValidator(email, EMAIL_REGEX, "email");
+                stringValidator(phone, PHONE_REGEX, "phone");
+                stringValidator(password, PASSWORD_REGEX, "password");
+                passwordsCheck();
                 if (validatorResult) {
                     result.setText("All fields are ok");
                     saveUser();
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void StringValidator(EditText field_id, String regex, String field_name) {
+    public void stringValidator(EditText field_id, String regex, String field_name) {
         String value = String.valueOf(field_id.getText());
         String already_in_result = String.valueOf(result.getText());
         if (value.equals("")) {
@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @SuppressLint("SetTextI18n")
-    public void PasswordsCheck() {
+    public void passwordsCheck() {
         String password_value = String.valueOf(password.getText());
         String confirm_password_value = String.valueOf(confirm_password.getText());
         if (confirm_password_value.equals("") && (password_value.equals(""))) {
