@@ -1,6 +1,7 @@
 package com.nazar.kulyk_lab.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,10 @@ import java.util.List;
 
 public class UserListActivity extends AppCompatActivity{
 
+    public static Intent getStartIntent(Context context) {
+        return new Intent(context, UserListActivity.class);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,10 +35,10 @@ public class UserListActivity extends AppCompatActivity{
         String jsonPreferences = sharedPref.getString("user_list", "");
         Log.i("users", jsonPreferences);
 
-        if(!jsonPreferences.equals("")){
+        if(!jsonPreferences.isEmpty()){
             Type type = new TypeToken<List<UserModel>>() {}.getType();
             listOfUsers = gson.fromJson(jsonPreferences, type);
-            Log.i("users", listOfUsers.toString());
+            Log.d("users", listOfUsers.toString());
 
             ListView userListView = findViewById(R.id.list_view_users);
             ArrayAdapter<UserModel> arrayAdapter = new ArrayAdapter<>(

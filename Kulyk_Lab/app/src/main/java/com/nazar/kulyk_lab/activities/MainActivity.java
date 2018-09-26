@@ -51,7 +51,12 @@ public class MainActivity extends AppCompatActivity {
         confirm_password = findViewById(R.id.confirm_password);
         submit_button = findViewById(R.id.submit_button);
         list_users_button = findViewById(R.id.list_view_button);
-        onSubmitButtonHandler();
+        submit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSubmitButtonClick();
+            }
+        });
         onListButtonHandler();
     }
     public void onListButtonHandler() {
@@ -59,33 +64,23 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                Intent user_list = new Intent(getBaseContext(), UserListActivity.class);
-                startActivity(user_list);
+                startActivity(UserListActivity.getStartIntent(MainActivity.this));
             }
         });
     }
-
-    public void onSubmitButtonHandler() {
-
-        submit_button.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            @SuppressLint("SetTextI18n")
-            public void onClick(View v) {
-                result.setText("");
-                validatorResult = true;
-                stringValidator(first_name, NAME_REGEX, "first name");
-                stringValidator(last_name, NAME_REGEX, "last name");
-                stringValidator(email, EMAIL_REGEX, "email");
-                stringValidator(phone, PHONE_REGEX, "phone");
-                stringValidator(password, PASSWORD_REGEX, "password");
-                passwordsCheck();
-                if (validatorResult) {
-                    result.setText("All fields are ok");
-                    saveUser();
-                }
-            }
-        });
+    void onSubmitButtonClick() {
+        result.setText("");
+        validatorResult = true;
+        stringValidator(first_name, NAME_REGEX, "first name");
+        stringValidator(last_name, NAME_REGEX, "last name");
+        stringValidator(email, EMAIL_REGEX, "email");
+        stringValidator(phone, PHONE_REGEX, "phone");
+        stringValidator(password, PASSWORD_REGEX, "password");
+        passwordsCheck();
+        if (validatorResult) {
+            result.setText("All fields are ok");
+            saveUser();
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -124,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
     public void saveUser(){
         String first_name_value = String.valueOf(first_name.getText());
         String last_name_value = String.valueOf(last_name.getText());
-        String email_value = String.valueOf(email.getText());
+        String email_value = String.valueOf(email.getText().toString());
         String phone_value = String.valueOf(phone.getText());
         String password_value = String.valueOf(password.getText());
 
@@ -133,8 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
         userArrayList.add(user);
 
-        Gson gson = new Gson();
-        String json = gson.toJson(userArrayList);
+        String json = new Gson().toJson(userArrayList);
         Log.i("users", json);
         SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
                 "user_list",
