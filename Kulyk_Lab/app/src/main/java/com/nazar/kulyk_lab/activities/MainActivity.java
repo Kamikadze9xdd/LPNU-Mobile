@@ -1,141 +1,83 @@
 package com.nazar.kulyk_lab.activities;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.google.gson.Gson;
 import com.nazar.kulyk_lab.R;
-import com.nazar.kulyk_lab.models.UserModel;
+import com.nazar.kulyk_lab.interfaces.RijksmuseumApi;
+import com.nazar.kulyk_lab.models.ArtList;
+import com.nazar.kulyk_lab.models.artObjects.ArtObjects;
 
 import java.util.ArrayList;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    public ArrayList<UserModel> userArrayList;
-    private static final String NAME_REGEX = "^[A-Z][a-zA-Z]+$";
-    private static final String EMAIL_REGEX = "^[a-zA-Z0-9+_.-]+@[a-zA-Z]+\\.[A-Za-z]{2,4}$";
-    private static final String PHONE_REGEX = "^\\+?[0-9]{10,16}$";
-    private static final String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])" +
-            "(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
-    protected TextView result;
-    protected String text;
-    protected EditText first_name;
-    protected EditText last_name;
-    protected EditText email;
-    protected EditText phone;
-    protected EditText password;
-    protected EditText confirm_password;
-    protected Button submit_button;
-    protected Boolean validatorResult;
-    protected Button list_users_button;
+    private Button get_data_button;
+    private static String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userArrayList = new ArrayList<>();
         setContentView(R.layout.activity_main);
-        result = findViewById(R.id.result);
-        first_name = findViewById(R.id.first_name);
-        last_name = findViewById(R.id.last_name);
-        email = findViewById(R.id.email);
-        phone = findViewById(R.id.phone);
-        password = findViewById(R.id.password);
-        confirm_password = findViewById(R.id.confirm_password);
-        submit_button = findViewById(R.id.submit_button);
-        list_users_button = findViewById(R.id.list_view_button);
-        submit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSubmitButtonClick();
-            }
-        });
-        onListButtonHandler();
+        get_data_button = findViewById(R.id.get_data_button);
+        onClickGetDataButton();
     }
-    public void onListButtonHandler() {
-        list_users_button.setOnClickListener(new View.OnClickListener() {
 
+    private void onClickGetDataButton(){
+        get_data_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(UserListActivity.getStartIntent(MainActivity.this));
+                getData();
             }
         });
     }
-    void onSubmitButtonClick() {
-        result.setText("");
-        validatorResult = true;
-        stringValidator(first_name, NAME_REGEX, "first name");
-        stringValidator(last_name, NAME_REGEX, "last name");
-        stringValidator(email, EMAIL_REGEX, "email");
-        stringValidator(phone, PHONE_REGEX, "phone");
-        stringValidator(password, PASSWORD_REGEX, "password");
-        passwordsCheck();
-        if (validatorResult) {
-            result.setText("All fields are ok");
-            saveUser();
-        }
+
+    private void getData(){
+        String BASE_URL = "https://www.rijksmuseum.nl/api/nl/";
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RijksmuseumApi rijksmuseumApi = retrofit.create(RijksmuseumApi.class);
+        Call<ArtList> call = rijksmuseumApi.getData();
+
+        call.enqueue(new Callback<ArtList>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onResponse(@NonNull Call<ArtList> call,
+                                   @NonNull Response<ArtList> response) {
+                Log.d(TAG, "onResponse: ServerResponse: " + response.toString());
+
+                ArrayList<ArtObjects> artObjects = Objects.requireNonNull(response.body())
+                        .getArtObjects();
+                displayData(artObjects);
+
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<ArtList> call, @NonNull Throwable t) {
+                Log.e(TAG, "onFailure: " + t.getMessage());
+            }
+        });
     }
 
-    @SuppressLint("SetTextI18n")
-    public void stringValidator(EditText field_id, String regex, String field_name) {
-        String value = String.valueOf(field_id.getText());
-        String already_in_result = String.valueOf(result.getText());
-        if (value.equals("")) {
-            validatorResult = false;
-            result.setText(already_in_result + "\nEmpty " + field_name);
-            field_id.setError("Empty " + field_name);
-        } else if (!(value.matches(regex))) {
-            validatorResult = false;
-            result.setText(already_in_result + "\nIncorrect " + field_name);
-            field_id.setError("Incorrect " + field_name);
+    private void displayData(ArrayList<ArtObjects> artObjects){
+        for (int i = 0; i < artObjects.size(); i++) {
+            Log.d(TAG, artObjects.get(i).toString() +
+                    "\n----------------------------------------");
         }
-    }
-
-    @SuppressLint("SetTextI18n")
-    public void passwordsCheck() {
-        String password_value = String.valueOf(password.getText());
-        String confirm_password_value = String.valueOf(confirm_password.getText());
-        if (confirm_password_value.equals("") && (password_value.equals(""))) {
-            validatorResult = false;
-            confirm_password.setError("Empty confirm password");
-            String already_in_result = String.valueOf(result.getText());
-            result.setText(already_in_result + "\nEmpty confirm password");
-        }
-        if (!(password_value.equals(confirm_password_value))) {
-            validatorResult = false;
-            confirm_password.setError("Password don`t match");
-            String already_in_result = String.valueOf(result.getText());
-            result.setText(already_in_result + "\nPasswords don`t match");
-        }
-    }
-
-    public void saveUser(){
-        String first_name_value = String.valueOf(first_name.getText());
-        String last_name_value = String.valueOf(last_name.getText());
-        String email_value = String.valueOf(email.getText().toString());
-        String phone_value = String.valueOf(phone.getText());
-        String password_value = String.valueOf(password.getText());
-
-        UserModel user = new UserModel(first_name_value,
-                last_name_value, email_value, phone_value, password_value);
-
-        userArrayList.add(user);
-
-        String json = new Gson().toJson(userArrayList);
-        Log.i("users", json);
-        SharedPreferences sharedPreferences = getApplicationContext().getSharedPreferences(
-                "user_list",
-                Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("user_list",json);
-        editor.apply();
     }
 }
