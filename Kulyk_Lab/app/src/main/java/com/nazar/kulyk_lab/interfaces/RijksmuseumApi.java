@@ -8,10 +8,6 @@ import retrofit2.http.Headers;
 
 public interface RijksmuseumApi {
     @Headers("Content-Type: application/json")
-    @GET("collection" +
-            "?key=3KgtVtTF" +
-            "&format=json" +
-            "&type=schilderij" +
-            "&f.normalized32Colors.hex=%20%23367614")
+    @GET("collection?key=3KgtVtTF&format=json")
     Call<ArtList> getData();
 }

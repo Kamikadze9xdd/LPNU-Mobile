@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getData(){
-        String BASE_URL = "https://www.rijksmuseum.nl/api/nl/";
+        String BASE_URL = "https://www.rijksmuseum.nl/api/eu/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
