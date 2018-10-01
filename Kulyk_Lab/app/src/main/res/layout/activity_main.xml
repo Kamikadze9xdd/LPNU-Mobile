@@ -14,91 +14,8 @@
         android:gravity="center|start"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/first_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="10dp"
-            android:hint="@string/input_your_first_name_here"
-            android:inputType="text"
-            android:singleLine="true"
-            android:textColor="@android:color/black" />
-
-        <EditText
-            android:id="@+id/last_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:hint="@string/input_your_last_name_here"
-            android:inputType="text"
-            android:singleLine="true"
-            android:textColor="#000000" />
-
-        <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:hint="@string/input_your_email_here"
-            android:inputType="textEmailAddress"
-            android:singleLine="true"
-            android:textColor="#000000" />
-
-        <EditText
-            android:id="@+id/phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:hint="@string/input_your_phone_here"
-            android:inputType="phone"
-            android:singleLine="true"
-            android:textColor="#000000" />
-
-        <EditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:hint="@string/input_your_password_here"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:textColor="#000000" />
-
-        <EditText
-            android:id="@+id/confirm_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:hint="@string/input_password_confirmation_here"
-            android:inputType="textPassword"
-            android:singleLine="true"
-            android:textColor="#000000" />
-
         <Button
-            android:id="@+id/submit_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:textAlignment="center"
-            android:focusable="true"
-            android:text="@string/submit" />
-
-        <Button
-            android:id="@+id/list_view_button"
+            android:id="@+id/get_data_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -106,16 +23,8 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
-            android:text="@string/users_list" />
-
-        <TextView
-            android:id="@+id/result"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="343dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp" />
+            android:onClick="onClickGetDataButton"
+            android:text="@string/get_data" />
 
     </LinearLayout>
 

@@ -1,17 +1,5 @@
 <resources>
-    <!---->
     <string name="app_name">Kulyk_Lab</string>
-    <string name="submit">Submit</string>
-    <string name="your_name">Your Name</string>
-    <string name="clear">Clear</string>
-    <string name="input_your_name_here">Input your name here</string>
-    <string name="input_your_first_name_here">Input your first name here</string>
-    <string name="input_your_last_name_here">Input your last name here</string>
-    <string name="input_your_email_here">Input your email here</string>
-
-    <!---->
-    <string name="input_your_phone_here">Input your phone here</string>
-    <string name="input_your_password_here">Input your password here</string>
-    <string name="input_password_confirmation_here">Input password confirmation here</string>
-    <string name="users_list">Users List</string>
+    <string name="get_data">GET DATA</string>
+    <string name="empty_response_body">Empty response body</string>
 </resources>
