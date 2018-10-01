@@ -23,5 +23,4 @@ public class Links {
     public String getWeb() {
         return web;
     }
-
 }

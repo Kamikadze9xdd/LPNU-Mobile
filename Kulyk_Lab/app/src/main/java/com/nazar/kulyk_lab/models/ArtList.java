@@ -24,5 +24,4 @@ public class ArtList {
     public ArrayList<ArtObjects> getArtObjects() {
         return artObjects;
     }
-
 }

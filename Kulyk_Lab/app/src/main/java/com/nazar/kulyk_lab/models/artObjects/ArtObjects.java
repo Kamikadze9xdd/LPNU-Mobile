@@ -55,7 +55,6 @@ public class ArtObjects {
         return headerImage;
     }
 
-
     public WebImage getWebImage() {
         return webImage;
     }
