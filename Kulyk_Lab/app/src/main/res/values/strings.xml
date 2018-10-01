@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Kulyk_Lab</string>
     <string name="get_data">GET DATA</string>
+    <string name="empty_response_body">Empty response body</string>
 </resources>

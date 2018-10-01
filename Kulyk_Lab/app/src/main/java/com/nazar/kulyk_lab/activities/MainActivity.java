@@ -13,6 +13,7 @@ import com.nazar.kulyk_lab.interfaces.RijksmuseumApi;
 import com.nazar.kulyk_lab.models.ArtList;
 import com.nazar.kulyk_lab.models.artObjects.ArtObjects;
 
+import java.lang.annotation.Target;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
     }
 
-    private void getData(){
+    private void getData() {
         String BASE_URL = "https://www.rijksmuseum.nl/api/eu/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -42,16 +43,18 @@ public class MainActivity extends AppCompatActivity {
         Call<ArtList> call = rijksmuseumApi.getData();
 
         call.enqueue(new Callback<ArtList>() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onResponse(@NonNull Call<ArtList> call,
                                    @NonNull Response<ArtList> response) {
                 Log.d(TAG, "onResponse: ServerResponse: " + response.toString());
 
-                ArrayList<ArtObjects> artObjects = Objects.requireNonNull(response.body())
-                        .getArtObjects();
-                displayData(artObjects);
-
+                final ArtList responseBody = response.body();
+                if (responseBody != null){
+                    ArrayList<ArtObjects> artObjects = response.body().getArtObjects();
+                    displayData(artObjects);
+                } else {
+                    Log.e(TAG, getString(R.string.empty_response_body));
+                }
             }
 
             @Override
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void displayData(ArrayList<ArtObjects> artObjects){
+    private void displayData(ArrayList<ArtObjects> artObjects) {
         for (int i = 0; i < artObjects.size(); i++) {
             Log.d(TAG, artObjects.get(i).toString() +
                     "\n----------------------------------------");
