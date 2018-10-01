@@ -7,7 +7,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 
 import com.nazar.kulyk_lab.R;
 import com.nazar.kulyk_lab.interfaces.RijksmuseumApi;
@@ -24,24 +23,12 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    private Button get_data_button;
     private static String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        get_data_button = findViewById(R.id.get_data_button);
-        onClickGetDataButton();
-    }
-
-    private void onClickGetDataButton(){
-        get_data_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getData();
-            }
-        });
     }
 
     private void getData(){
@@ -79,5 +66,9 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, artObjects.get(i).toString() +
                     "\n----------------------------------------");
         }
+    }
+
+    public void onClickGetDataButton(View view) {
+        getData();
     }
 }

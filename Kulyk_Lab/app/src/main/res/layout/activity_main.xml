@@ -23,6 +23,7 @@
             android:layout_marginTop="10dp"
             android:clickable="true"
             android:focusable="true"
+            android:onClick="onClickGetDataButton"
             android:text="@string/get_data" />
 
     </LinearLayout>
