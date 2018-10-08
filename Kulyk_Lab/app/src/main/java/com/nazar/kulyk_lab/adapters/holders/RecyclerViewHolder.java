@@ -14,8 +14,6 @@ import butterknife.ButterKnife;
 public class RecyclerViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.short_title)
     public TextView short_title;
-    @BindView(R.id.long_title)
-    public TextView long_title;
     @BindView(R.id.web_image)
     public ImageView web_image;
     @BindView(R.id.author)

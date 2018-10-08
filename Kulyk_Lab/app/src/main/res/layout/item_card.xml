@@ -21,7 +21,7 @@
         <ImageView
             android:id="@+id/web_image"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:contentDescription="@string/web_image" />
 
@@ -35,39 +35,13 @@
             android:textColor="@android:color/black"/>
 
         <TextView
-            android:hint="@string/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal" />
-
-        <TextView
-            android:layout_marginTop="10dp"
-            android:id="@+id/long_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:text="Long title"
-            android:gravity="center_horizontal"
-            android:textColor="@android:color/black" />
-
-        <TextView
-            android:hint="@string/long_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"/>
-
-        <TextView
             android:layout_marginTop="10dp"
             android:id="@+id/author"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:textColor="@android:color/black" />
-
-        <TextView
-            android:hint="@string/author"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"/>
+            android:textColor="@android:color/black"
+            android:textStyle="bold|italic"/>
 
     </LinearLayout>
 

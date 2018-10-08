@@ -17,6 +17,7 @@ import com.nazar.kulyk_lab.models.ArtList;
 import com.nazar.kulyk_lab.models.artObjects.ArtObjects;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,12 +27,14 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-
 public class MainActivity extends AppCompatActivity {
     private static String TAG = "MainActivity";
-    @BindView(R.id.recyclerView) RecyclerView recyclerView;
-    @BindView(R.id.swipeContainer) SwipeRefreshLayout swipeContainer;
-    @BindView(R.id.no_data) TextView no_data;
+    @BindView(R.id.recyclerView)
+    RecyclerView recyclerView;
+    @BindView(R.id.swipeContainer)
+    SwipeRefreshLayout swipeContainer;
+    @BindView(R.id.no_data)
+    TextView no_data;
     private LinearLayoutManager linerLayoutManager = new LinearLayoutManager(this);
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
 
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(@NonNull Call<ArtList> call,
                                    @NonNull Response<ArtList> response) {
                 Log.d(TAG, response.toString());
-                ArrayList<ArtObjects> artObjects = response.body().getArtObjects();
+                ArrayList<ArtObjects> artObjects = Objects.requireNonNull(response.body()).getArtObjects();
                 displayData(artObjects);
             }
 
@@ -80,10 +83,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void displayData(ArrayList<ArtObjects> artObjects) {
-        for (int i = 0; i < artObjects.size(); i++) {
-            Log.d(TAG, artObjects.get(i).toString() +
-                    "\n----------------------------------------");
-        }
         recyclerView.setLayoutManager(linerLayoutManager);
         recyclerView.setAdapter(adapter);
         adapter.addAll(artObjects);

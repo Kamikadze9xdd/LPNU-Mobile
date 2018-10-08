@@ -14,17 +14,17 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder> {
     private ArrayList<ArtObjects> artObjects = new ArrayList<>();
 
-    public void addAll(List<ArtObjects> artObjects){
+    public void addAll(List<ArtObjects> artObjects) {
         int pos = getItemCount();
 
         this.artObjects.addAll(artObjects);
         notifyItemRangeInserted(pos, this.artObjects.size());
     }
 
-    public void clear(){
+    public void clear() {
         artObjects.clear();
         notifyDataSetChanged();
     }
@@ -32,14 +32,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
     @NonNull
     @Override
     public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_card, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_card,
+                viewGroup, false);
         return new RecyclerViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewHolder viewHolder, int i) {
         viewHolder.short_title.setText(artObjects.get(i).getTitle());
-        viewHolder.long_title.setText(artObjects.get(i).getLongTitle());
         viewHolder.author.setText(artObjects.get(i).getPrincipalOrFirstMaker());
         Picasso.get().load(artObjects.get(i).getWebImage().getUrl()).into(viewHolder.web_image);
     }
