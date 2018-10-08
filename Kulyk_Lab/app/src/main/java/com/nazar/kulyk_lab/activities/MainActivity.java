@@ -33,27 +33,30 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.swipeContainer)
     SwipeRefreshLayout swipeContainer;
     @BindView(R.id.no_data)
-    TextView no_data;
+    TextView noData;
     private LinearLayoutManager linerLayoutManager = new LinearLayoutManager(this);
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        getData();
+        recyclerView.setLayoutManager(linerLayoutManager);
+        recyclerView.setAdapter(adapter);
+        loadData();
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 refresh();
-                no_data.setVisibility(View.INVISIBLE);
+                noData.setVisibility(View.INVISIBLE);
             }
         });
         swipeContainer.setColorSchemeResources(R.color.colorPrimary);
     }
 
-    public void getData() {
+    private void loadData() {
         String BASE_URL = "https://www.rijksmuseum.nl/api/eu/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -76,20 +79,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Call<ArtList> call, @NonNull Throwable t) {
                 Log.e(TAG, t.getMessage());
-                no_data.setVisibility(View.VISIBLE);
+                noData.setVisibility(View.VISIBLE);
             }
         });
     }
 
     private void displayData(ArrayList<ArtObjects> artObjects) {
-        recyclerView.setLayoutManager(linerLayoutManager);
-        recyclerView.setAdapter(adapter);
         adapter.addAll(artObjects);
     }
 
     public void refresh() {
         adapter.clear();
-        getData();
+        loadData();
         swipeContainer.setRefreshing(false);
     }
 }

@@ -31,17 +31,17 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @NonNull
     @Override
-    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+    public RecyclerViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_card,
                 viewGroup, false);
         return new RecyclerViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerViewHolder viewHolder, int i) {
-        viewHolder.short_title.setText(artObjects.get(i).getTitle());
-        viewHolder.author.setText(artObjects.get(i).getPrincipalOrFirstMaker());
-        Picasso.get().load(artObjects.get(i).getWebImage().getUrl()).into(viewHolder.web_image);
+    public void onBindViewHolder(@NonNull RecyclerViewHolder viewHolder, int position) {
+        viewHolder.short_title.setText(artObjects.get(position).getTitle());
+        viewHolder.author.setText(artObjects.get(position).getPrincipalOrFirstMaker());
+        Picasso.get().load(artObjects.get(position).getWebImage().getUrl()).into(viewHolder.web_image);
     }
 
     @Override
