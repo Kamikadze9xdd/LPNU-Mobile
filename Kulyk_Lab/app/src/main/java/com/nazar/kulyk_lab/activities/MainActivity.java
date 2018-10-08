@@ -28,7 +28,6 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    private static String TAG = "MainActivity";
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
     @BindView(R.id.swipeContainer)
@@ -51,8 +50,7 @@ public class MainActivity extends AppCompatActivity {
                 no_data.setVisibility(View.INVISIBLE);
             }
         });
-        // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(R.color.colorPrimaryDark);
+        swipeContainer.setColorSchemeResources(R.color.colorPrimary);
     }
 
     public void getData() {
@@ -66,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Call<ArtList> call = rijksmuseumApi.getData();
 
         call.enqueue(new Callback<ArtList>() {
+            String TAG = getString(R.string.TAG);
             @Override
             public void onResponse(@NonNull Call<ArtList> call,
                                    @NonNull Response<ArtList> response) {

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Kulyk_Lab</string>
+
+    <!-- MainActivity -->
     <string name="get_data">GET DATA</string>
     <string name="empty_response_body">Empty response body</string>
     <string name="web_image">Web Image</string>
@@ -7,4 +9,5 @@
     <string name="title">Title</string>
     <string name="long_title">Long Title</string>
     <string name="author">Author</string>
+    <string name="TAG">MainActivity</string>
 </resources>
