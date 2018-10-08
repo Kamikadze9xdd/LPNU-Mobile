@@ -66,14 +66,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(@NonNull Call<ArtList> call,
                                    @NonNull Response<ArtList> response) {
-                Log.d(TAG, "onResponse: ServerResponse: " + response.toString());
+                Log.d(TAG, response.toString());
                 ArrayList<ArtObjects> artObjects = response.body().getArtObjects();
                 displayData(artObjects);
             }
 
             @Override
             public void onFailure(@NonNull Call<ArtList> call, @NonNull Throwable t) {
-                Log.e(TAG, "onFailure: " + t.getMessage());
+                Log.e(TAG, t.getMessage());
                 no_data.setVisibility(View.VISIBLE);
             }
         });
