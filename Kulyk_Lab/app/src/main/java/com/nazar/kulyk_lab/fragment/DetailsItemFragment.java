@@ -9,18 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.nazar.kulyk_lab.R;
+import com.nazar.kulyk_lab.models.artObjects.ArtObject;
 
-public class FavFragment extends Fragment{
+public class DetailsItemFragment extends Fragment {
+    private ArtObject artObject;
 
-    public FavFragment(){
-
-    }
+    public DetailsItemFragment(){}
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
             savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fav, container, false);
+        View view = inflater.inflate(R.layout.item_details, container, false);
+
         return view;
     }
 }

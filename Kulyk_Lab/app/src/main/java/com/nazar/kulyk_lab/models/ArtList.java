@@ -1,7 +1,7 @@
 package com.nazar.kulyk_lab.models;
 
 import com.google.gson.annotations.SerializedName;
-import com.nazar.kulyk_lab.models.artObjects.ArtObjects;
+import com.nazar.kulyk_lab.models.artObjects.ArtObject;
 
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class ArtList {
     private String count;
 
     @SerializedName("artObjects")
-    private ArrayList<ArtObjects> artObjects;
+    private ArrayList<ArtObject> artObjects;
 
     @Override
     public String toString() {
@@ -21,7 +21,7 @@ public class ArtList {
                 '}';
     }
 
-    public ArrayList<ArtObjects> getArtObjects() {
+    public ArrayList<ArtObject> getArtObjects() {
         return artObjects;
     }
 }
