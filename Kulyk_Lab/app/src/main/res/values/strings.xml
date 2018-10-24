@@ -16,4 +16,5 @@
     <string name="more_info">More info</string>
     <string name="favourites">Favourites</string>
     <string name="image_button_for_favorities">Image button for favorities</string>
+    <string name="full_screen_image">Full screen image</string>
 </resources>

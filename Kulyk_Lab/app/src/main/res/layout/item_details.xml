@@ -99,14 +99,19 @@
             android:text="@string/author"
             android:textSize="16sp" />
 
-        <ImageButton
-            android:id="@+id/fav_button"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:contentDescription="@string/image_button_for_favorities"
-            android:gravity="center|start"
-            android:src="@drawable/ic_star_border_black_empty_30dp" />
+            android:gravity="start|center">
 
+            <ImageButton
+                android:id="@+id/fav_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:contentDescription="@string/image_button_for_favorities"
+                android:src="@drawable/ic_star_border_black_empty_30dp" />
+
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

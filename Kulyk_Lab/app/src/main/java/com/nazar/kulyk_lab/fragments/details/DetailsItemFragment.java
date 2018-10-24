@@ -1,9 +1,11 @@
 package com.nazar.kulyk_lab.fragments.details;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nazar.kulyk_lab.R;
+import com.nazar.kulyk_lab.activities.MainActivity;
 import com.nazar.kulyk_lab.localstorage.ItemsStorage;
 import com.nazar.kulyk_lab.models.artObjects.ArtObject;
 import com.squareup.picasso.Picasso;
@@ -31,7 +34,7 @@ public class DetailsItemFragment extends Fragment {
     @BindView(R.id.fav_button)
     protected ImageButton favButton;
 
-    ItemsStorage itemsStorage = new ItemsStorage();
+    private ItemsStorage itemsStorage = new ItemsStorage();
 
     public DetailsItemFragment(){}
 
@@ -48,6 +51,19 @@ public class DetailsItemFragment extends Fragment {
         ArtObject artObject = (ArtObject) Objects.requireNonNull(bundle).getSerializable("current_item");
         if(artObject != null){
             visibleItem(artObject, view);
+
+            imageDetail.setOnClickListener(v -> {
+                MainActivity mainActivity = (MainActivity) view.getContext();
+                FragmentTransaction ft = mainActivity.getSupportFragmentManager().beginTransaction();
+                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+
+                FullScreenImage fullScreenImage = new FullScreenImage();
+
+                bundle.putSerializable("link", artObject.getWebImage().getUrl());
+                fullScreenImage.setArguments(bundle);
+
+                ft.replace(R.id.container, fullScreenImage).addToBackStack(null).commit();
+            });
         }
 
         favButton.setOnClickListener(v -> {
@@ -60,8 +76,6 @@ public class DetailsItemFragment extends Fragment {
             }
         });
 
-        imageDetail.setOnClickListener(v -> {
-        });
         return view;
     }
 
