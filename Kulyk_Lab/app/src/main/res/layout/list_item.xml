@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<card_view:android.support.v7.widget.CardView android:id="@+id/card"
+<card_view:android.support.v7.widget.CardView
+    android:id="@+id/list_card"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -15,7 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/colorCard">
 
         <ImageView
             android:id="@+id/web_image"
@@ -41,26 +43,6 @@
             android:gravity="center_horizontal"
             android:textColor="@android:color/black"
             android:textStyle="bold|italic"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
-
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/more_info"
-                android:id="@+id/more_info_button"/>
-
-            <Button
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:hint="@string/add_to_favourites"
-                android:id="@+id/card_fav_button"/>
-
-        </LinearLayout>
 
     </LinearLayout>
 

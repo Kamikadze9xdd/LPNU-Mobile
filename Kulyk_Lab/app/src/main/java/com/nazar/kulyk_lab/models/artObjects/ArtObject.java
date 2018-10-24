@@ -5,7 +5,9 @@ import com.nazar.kulyk_lab.models.artObjects.images.HeaderImage;
 import com.nazar.kulyk_lab.models.artObjects.images.WebImage;
 import com.nazar.kulyk_lab.models.artObjects.links.Links;
 
-public class ArtObject {
+import java.io.Serializable;
+
+public class ArtObject implements Serializable {
 
     @SerializedName("id")
     private String id;

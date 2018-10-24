@@ -1,12 +1,14 @@
 package com.nazar.kulyk_lab.netconnection;
 
+import android.app.Application;
+
 import com.nazar.kulyk_lab.interfaces.RijksmuseumApi;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitClient {
+public class RetrofitClient extends Application{
 
     public Call init(){
         String BASE_URL = "https://www.rijksmuseum.nl/api/eu/";

@@ -1,4 +1,4 @@
-package com.nazar.kulyk_lab.fragment;
+package com.nazar.kulyk_lab.fragments.favourities;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nazar.kulyk_lab.R;
 import com.nazar.kulyk_lab.activities.MainActivity;
-import com.nazar.kulyk_lab.adapters.FavouritesItemsRecyclerViewAdapter;
+import com.nazar.kulyk_lab.adapters.RecyclerViewAdapter;
 import com.nazar.kulyk_lab.models.artObjects.ArtObject;
 
 import java.lang.reflect.Type;
@@ -30,29 +30,26 @@ import butterknife.ButterKnife;
 
 public class FavouritesItemsFragment extends Fragment{
     @BindView(R.id.recyclerView_fav)
-    RecyclerView recyclerView;
+    protected RecyclerView recyclerView;
     @BindView(R.id.no_data)
-    TextView noData;
+    protected TextView noData;
     @BindView(R.id.swipeRefreshLayout_fav)
-    SwipeRefreshLayout swipeRefreshLayout;
+    protected SwipeRefreshLayout swipeRefreshLayout;
 
-    private FavouritesItemsRecyclerViewAdapter adapter = new FavouritesItemsRecyclerViewAdapter();
+    private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
             savedInstanceState) {
-        View view = inflater.inflate(R.layout.item_list_fav, container, false);
+        View view = inflater.inflate(R.layout.fav_all, container, false);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         loadData();
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                noData.setVisibility(View.VISIBLE);
-                refresh();
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            noData.setVisibility(View.VISIBLE);
+            refresh();
         });
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         return view;

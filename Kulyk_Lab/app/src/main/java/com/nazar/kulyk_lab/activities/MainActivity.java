@@ -1,24 +1,22 @@
 package com.nazar.kulyk_lab.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.nazar.kulyk_lab.R;
-import com.nazar.kulyk_lab.fragment.FavouritesItemsFragment;
-import com.nazar.kulyk_lab.fragment.ListItemsFragment;
-import com.nazar.kulyk_lab.fragment.ViewPagerAdapter;
+import com.nazar.kulyk_lab.fragments.favourities.FavouritesItemsFragment;
+import com.nazar.kulyk_lab.fragments.list_all.ListItemsFragment;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
-    @BindView(R.id.tab_id)
-    TabLayout tabLayout;
-    @BindView(R.id.viewpager_id)
-    ViewPager viewPager;
+//    @BindView(R.id.tab_id)
+//    TabLayout tabLayout;
+//    @BindView(R.id.viewpager_id)
+//    public ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +24,35 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        ListItemsFragment listItemsFragment = new ListItemsFragment();
 
-        adapter.addFragment(new ListItemsFragment(), "All");
-        adapter.addFragment(new FavouritesItemsFragment(), "Favourites");
-        viewPager.setAdapter(adapter);
-        tabLayout.setupWithViewPager(viewPager);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, listItemsFragment)
+                .addToBackStack(null)
+                .commit();
+
+//        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+//
+//        adapter.addFragment(new ListItemsFragment(), "All");
+//        adapter.addFragment(new FavouritesItemsFragment(), "Favourites");
+//        adapter.addFragment(new DetailsItemFragment(), "Details");
+//        viewPager.setAdapter(adapter);
+//        tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.fav_button, menu);
+        return true;
+    }
+
+    public void favoritesListDisplay(MenuItem item) {
+
+        FavouritesItemsFragment favouritesItemsFragment = new FavouritesItemsFragment();
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.container, favouritesItemsFragment)
+                .addToBackStack(null)
+                .commit();
     }
 }

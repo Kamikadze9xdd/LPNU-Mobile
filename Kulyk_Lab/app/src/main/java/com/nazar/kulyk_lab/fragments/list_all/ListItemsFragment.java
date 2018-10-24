@@ -1,4 +1,4 @@
-package com.nazar.kulyk_lab.fragment;
+package com.nazar.kulyk_lab.fragments.list_all;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nazar.kulyk_lab.R;
-import com.nazar.kulyk_lab.adapters.ListItemRecyclerViewAdapter;
+import com.nazar.kulyk_lab.adapters.RecyclerViewAdapter;
 import com.nazar.kulyk_lab.models.ArtList;
 import com.nazar.kulyk_lab.models.artObjects.ArtObject;
 import com.nazar.kulyk_lab.netconnection.RetrofitClient;
@@ -31,30 +31,26 @@ import static java.util.Objects.requireNonNull;
 
 public class ListItemsFragment extends Fragment {
     @BindView(R.id.recyclerView_all)
-    RecyclerView recyclerView;
+    protected RecyclerView recyclerView;
     @BindView(R.id.no_data)
-    TextView noData;
+    protected TextView noData;
     @BindView(R.id.swipeRefreshLayout)
-    SwipeRefreshLayout swipeRefreshLayout;
+    protected SwipeRefreshLayout swipeRefreshLayout;
 
-    private ListItemRecyclerViewAdapter adapter = new ListItemRecyclerViewAdapter();
-
+    private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
             savedInstanceState) {
-        View view = inflater.inflate(R.layout.item_list_all, container, false);
+        View view = inflater.inflate(R.layout.list_all, container, false);
         ButterKnife.bind(this, view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         loadData();
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                noData.setVisibility(View.VISIBLE);
-                refresh();
-            }
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            noData.setVisibility(View.VISIBLE);
+            refresh();
         });
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         return view;
