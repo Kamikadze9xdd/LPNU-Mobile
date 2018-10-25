@@ -14,12 +14,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.nazar.kulyk_lab.R;
+import com.nazar.kulyk_lab.activities.MainActivity;
 import com.nazar.kulyk_lab.adapters.RecyclerViewAdapter;
+import com.nazar.kulyk_lab.interfaces.RijksmuseumApi;
 import com.nazar.kulyk_lab.models.ArtList;
 import com.nazar.kulyk_lab.models.artObjects.ArtObject;
 import com.nazar.kulyk_lab.netconnection.RetrofitClient;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,9 +60,8 @@ public class ListItemsFragment extends Fragment {
     }
 
     private void loadData() {
-        RetrofitClient retrofitClient = new RetrofitClient();
-        Call call = retrofitClient.init();
-        call.enqueue(new Callback<ArtList>() {
+        RetrofitClient retrofitClient =  (RetrofitClient) Objects.requireNonNull(getActivity()).getApplication();
+        retrofitClient.getRijksmuseumApi().getData().enqueue(new Callback<ArtList>() {
             String TAG = getString(R.string.TAG);
             @Override
             public void onResponse(@NonNull Call<ArtList> call,
@@ -79,6 +81,7 @@ public class ListItemsFragment extends Fragment {
     }
 
     private void displayData(ArrayList<ArtObject> artObjects) {
+        adapter.clear();
         adapter.addAll(artObjects);
     }
 

@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import com.nazar.kulyk_lab.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.zip.Inflater;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

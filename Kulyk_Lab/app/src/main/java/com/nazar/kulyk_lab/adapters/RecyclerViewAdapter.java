@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,27 +39,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder
         final View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.list_item,
                 viewGroup, false);
 
-        final ListItemViewHolder recyclerViewHolder =  new ListItemViewHolder(view);
+        final ListItemViewHolder recyclerViewHolder = new ListItemViewHolder(view);
 
         recyclerViewHolder.cardView.setOnClickListener(v -> {
-
-            MainActivity mainActivity = (MainActivity) view.getContext();
-
-            Log.d("RecyclerView",String.valueOf(recyclerViewHolder.getAdapterPosition()));
-
-            FragmentTransaction ft = mainActivity.getSupportFragmentManager().beginTransaction();
+            FragmentTransaction ft = ((MainActivity) view.getContext())
+                    .getSupportFragmentManager()
+                    .beginTransaction();
             ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-
             DetailsItemFragment detailsItemFragment = new DetailsItemFragment();
-
             Bundle bundle = new Bundle();
             ArtObject artObject = artObjects.get(recyclerViewHolder.getAdapterPosition());
             bundle.putSerializable("current_item", artObject);
             detailsItemFragment.setArguments(bundle);
-
             ft.replace(R.id.container, detailsItemFragment).addToBackStack(null).commit();
         });
-
         return recyclerViewHolder;
     }
 

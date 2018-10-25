@@ -33,8 +33,6 @@ public class FavouritesItemsFragment extends Fragment{
     protected RecyclerView recyclerView;
     @BindView(R.id.no_data)
     protected TextView noData;
-    @BindView(R.id.swipeRefreshLayout_fav)
-    protected SwipeRefreshLayout swipeRefreshLayout;
 
     private RecyclerViewAdapter adapter = new RecyclerViewAdapter();
 
@@ -47,12 +45,14 @@ public class FavouritesItemsFragment extends Fragment{
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         loadData();
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            noData.setVisibility(View.VISIBLE);
-            refresh();
-        });
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        adapter.clear();
+        loadData();
+        super.onResume();
     }
 
     private void loadData(){
@@ -65,18 +65,14 @@ public class FavouritesItemsFragment extends Fragment{
         String jsonPreferences = sharedPref.getString("fav_list", "");
         Log.i("favs", jsonPreferences);
 
-        if(!jsonPreferences.equals("")){
+        if(!jsonPreferences.equals("[]")){
             Type type = new TypeToken<List<ArtObject>>() {}.getType();
             artObjects = gson.fromJson(jsonPreferences, type);
             Log.i("users", artObjects.toString());
-
+            noData.setVisibility(View.INVISIBLE);
             adapter.addAll(artObjects);
+        } else {
+            noData.setVisibility(View.VISIBLE);
         }
-    }
-
-    public void refresh() {
-        adapter.clear();
-        loadData();
-        swipeRefreshLayout.setRefreshing(false);
     }
 }

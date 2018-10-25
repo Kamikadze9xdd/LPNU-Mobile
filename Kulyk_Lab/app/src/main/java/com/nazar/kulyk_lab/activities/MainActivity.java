@@ -1,6 +1,7 @@
 package com.nazar.kulyk_lab.activities;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,24 +14,14 @@ import butterknife.ButterKnife;
 
 
 public class MainActivity extends AppCompatActivity {
-//    @BindView(R.id.tab_id)
-//    TabLayout tabLayout;
-//    @BindView(R.id.viewpager_id)
-//    public ViewPager viewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         ListItemsFragment listItemsFragment = new ListItemsFragment();
-
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, listItemsFragment)
-                .addToBackStack(null)
-                .commit();
-
+        setCurrentFragment(listItemsFragment);
     }
 
     @Override
@@ -40,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void favoritesListDisplay(MenuItem item) {
-
         FavouritesItemsFragment favouritesItemsFragment = new FavouritesItemsFragment();
+        setCurrentFragment(favouritesItemsFragment);
+    }
 
+    private void setCurrentFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, favouritesItemsFragment)
+                .replace(R.id.container, fragment)
                 .addToBackStack(null)
                 .commit();
     }

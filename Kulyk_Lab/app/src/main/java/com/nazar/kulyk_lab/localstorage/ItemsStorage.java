@@ -27,12 +27,12 @@ public class ItemsStorage {
                 Toast.makeText(view.getContext(),"Remove from favourites", Toast.LENGTH_SHORT).show();
                 return false;
             } else {
-                saveToAlreadySaved(artObject, view);
+                saveToSaved(artObject, view);
                 Toast.makeText(view.getContext(),"Add to favourites", Toast.LENGTH_SHORT).show();
                 return true;
             }
         } else{
-            saveFirstObject(artObject, view);
+            saveToSaved(artObject, view);
             Toast.makeText(view.getContext(),"Add to favourites", Toast.LENGTH_SHORT).show();
             return true;
         }
@@ -56,21 +56,8 @@ public class ItemsStorage {
         return false;
     }
 
-    private void saveToAlreadySaved(ArtObject artObject, View view){
+    private void saveToSaved(ArtObject artObject, View view){
         List<ArtObject> artObjects = getAlreadySaved(view);
-        artObjects.add(artObject);
-        String json = gson.toJson(artObjects);
-        SharedPreferences sharedPreferences = view.getContext().getApplicationContext().getSharedPreferences(
-                "fav_list",
-                Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("fav_list",json);
-        editor.apply();
-    }
-
-    private void saveFirstObject(ArtObject artObject, View view){
-        ArrayList<ArtObject> artObjects = new ArrayList<>();
         artObjects.add(artObject);
         String json = gson.toJson(artObjects);
         SharedPreferences sharedPreferences = view.getContext().getApplicationContext().getSharedPreferences(
