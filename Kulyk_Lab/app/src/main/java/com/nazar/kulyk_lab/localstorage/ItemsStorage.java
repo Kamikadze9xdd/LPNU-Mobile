@@ -59,14 +59,7 @@ public class ItemsStorage {
     private void saveToSaved(ArtObject artObject, View view){
         List<ArtObject> artObjects = getAlreadySaved(view);
         artObjects.add(artObject);
-        String json = gson.toJson(artObjects);
-        SharedPreferences sharedPreferences = view.getContext().getApplicationContext().getSharedPreferences(
-                "fav_list",
-                Context.MODE_PRIVATE);
-
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("fav_list",json);
-        editor.apply();
+        saveListObject(artObjects, view);
     }
 
     private void removeFromAlreadySaved(ArtObject artObject, View view){
@@ -80,19 +73,28 @@ public class ItemsStorage {
             ArrayList<ArtObject> alreadySaved;
             Type type = new TypeToken<List<ArtObject>>() {}.getType();
             alreadySaved = gson.fromJson(jsonPreferences, type);
-            alreadySaved.removeIf(t -> t.getId().equals(artObject.getId()));
-            String json = gson.toJson(alreadySaved);
-            SharedPreferences sharedPreferences = view.getContext().getApplicationContext().getSharedPreferences(
-                    "fav_list",
-                    Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("fav_list",json);
-            editor.apply();
+            for(int i = 0; i < alreadySaved.size(); i++){
+                if(alreadySaved.get(i).getId().equals(artObject.getId())){
+                    alreadySaved.remove(i);
+                    break;
+                }
+            }
+            saveListObject(alreadySaved, view);
         }
     }
 
     public Boolean checkThatObjectAlreadySaved(ArtObject artObject, View view){
         List<ArtObject> artObjects = getAlreadySaved(view);
         return checkAlreadySaved(artObjects, artObject);
+    }
+
+    private void saveListObject(List<ArtObject> artObjects, View view){
+        String json = gson.toJson(artObjects);
+        SharedPreferences sharedPreferences = view.getContext().getApplicationContext().getSharedPreferences(
+                "fav_list",
+                Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("fav_list",json);
+        editor.apply();
     }
 }
