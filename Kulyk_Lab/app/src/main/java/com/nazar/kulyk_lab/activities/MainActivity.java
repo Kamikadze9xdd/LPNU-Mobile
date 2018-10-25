@@ -31,13 +31,6 @@ public class MainActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
 
-//        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-//
-//        adapter.addFragment(new ListItemsFragment(), "All");
-//        adapter.addFragment(new FavouritesItemsFragment(), "Favourites");
-//        adapter.addFragment(new DetailsItemFragment(), "Details");
-//        viewPager.setAdapter(adapter);
-//        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nazar.kulyk_lab.R;
@@ -33,6 +34,8 @@ public class DetailsItemFragment extends Fragment {
     protected TextView longTitleDetail;
     @BindView(R.id.fav_button)
     protected ImageButton favButton;
+    @BindView(R.id.author_details)
+    protected TextView author_detail;
 
     private ItemsStorage itemsStorage = new ItemsStorage();
 
@@ -63,6 +66,7 @@ public class DetailsItemFragment extends Fragment {
                 fullScreenImage.setArguments(bundle);
 
                 ft.replace(R.id.container, fullScreenImage).addToBackStack(null).commit();
+
             });
         }
 
@@ -83,6 +87,8 @@ public class DetailsItemFragment extends Fragment {
         Picasso.get().load(artObject.getWebImage().getUrl()).into(imageDetail);
         titleDetail.setText(artObject.getTitle());
         longTitleDetail.setText(artObject.getLongTitle());
+        author_detail.setText(artObject.getPrincipalOrFirstMaker());
+
         if(itemsStorage.checkThatObjectAlreadySaved(artObject, view)){
             favButton.setImageResource(R.drawable.ic_star_black_full_30dp);
         } else{

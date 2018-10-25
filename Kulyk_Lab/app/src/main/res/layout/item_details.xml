@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -99,8 +100,8 @@
             android:text="@string/author"
             android:textSize="16sp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start|center">
 
@@ -108,10 +109,12 @@
                 android:id="@+id/fav_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
                 android:background="@android:color/white"
                 android:contentDescription="@string/image_button_for_favorities"
-                android:src="@drawable/ic_star_border_black_empty_30dp" />
+                android:src="@drawable/ic_star_border_black_empty_30dp"
+                app:layout_constraintEnd_toEndOf="parent" />
 
-        </LinearLayout>
+        </android.support.constraint.ConstraintLayout>
     </LinearLayout>
 </ScrollView>
