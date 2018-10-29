@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setCurrentFragment(favouritesItemsFragment);
     }
 
-    private void setCurrentFragment(Fragment fragment) {
+    public void setCurrentFragment(Fragment fragment) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.container, fragment)
                 .addToBackStack(null)

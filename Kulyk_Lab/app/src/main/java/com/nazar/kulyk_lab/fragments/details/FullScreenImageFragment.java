@@ -15,7 +15,7 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FullScreenImage extends Fragment {
+public class FullScreenImageFragment extends Fragment {
     @BindView(R.id.full_screen_image)
     protected ImageView fullScreenImage;
 

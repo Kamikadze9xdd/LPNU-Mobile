@@ -8,8 +8,8 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitClient extends Application{
-
     private RijksmuseumApi rijksmuseumApi;
+    private static final String BASE_URL = "https://www.rijksmuseum.nl/api/eu/";
 
     @Override
     public void onCreate() {
@@ -18,7 +18,6 @@ public class RetrofitClient extends Application{
     }
 
     public void setRijksmuseumApi(){
-        String BASE_URL = "https://www.rijksmuseum.nl/api/eu/";
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())

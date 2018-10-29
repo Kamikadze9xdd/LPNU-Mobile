@@ -42,16 +42,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<ListItemViewHolder
         final ListItemViewHolder recyclerViewHolder = new ListItemViewHolder(view);
 
         recyclerViewHolder.cardView.setOnClickListener(v -> {
-            FragmentTransaction ft = ((MainActivity) view.getContext())
-                    .getSupportFragmentManager()
-                    .beginTransaction();
-            ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
             DetailsItemFragment detailsItemFragment = new DetailsItemFragment();
             Bundle bundle = new Bundle();
             ArtObject artObject = artObjects.get(recyclerViewHolder.getAdapterPosition());
             bundle.putSerializable("current_item", artObject);
             detailsItemFragment.setArguments(bundle);
-            ft.replace(R.id.container, detailsItemFragment).addToBackStack(null).commit();
+            ((MainActivity) view.getContext()).setCurrentFragment(detailsItemFragment);
         });
         return recyclerViewHolder;
     }

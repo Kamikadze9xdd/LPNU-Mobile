@@ -1,17 +1,14 @@
 package com.nazar.kulyk_lab.fragments.details;
 
-import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.nazar.kulyk_lab.R;
@@ -56,17 +53,10 @@ public class DetailsItemFragment extends Fragment {
             visibleItem(artObject, view);
 
             imageDetail.setOnClickListener(v -> {
-                MainActivity mainActivity = (MainActivity) view.getContext();
-                FragmentTransaction ft = mainActivity.getSupportFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
-
-                FullScreenImage fullScreenImage = new FullScreenImage();
-
+                FullScreenImageFragment fullScreenImageFragment = new FullScreenImageFragment();
                 bundle.putSerializable("link", artObject.getWebImage().getUrl());
-                fullScreenImage.setArguments(bundle);
-
-                ft.replace(R.id.container, fullScreenImage).addToBackStack(null).commit();
-
+                fullScreenImageFragment.setArguments(bundle);
+                ((MainActivity) view.getContext()).setCurrentFragment(fullScreenImageFragment);
             });
         }
 
