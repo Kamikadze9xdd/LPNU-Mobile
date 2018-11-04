@@ -5,7 +5,9 @@ import com.nazar.kulyk_lab.models.artObjects.images.HeaderImage;
 import com.nazar.kulyk_lab.models.artObjects.images.WebImage;
 import com.nazar.kulyk_lab.models.artObjects.links.Links;
 
-public class ArtObjects {
+import java.io.Serializable;
+
+public class ArtObject implements Serializable {
 
     @SerializedName("id")
     private String id;
@@ -73,5 +75,10 @@ public class ArtObjects {
 
     public String getLongTitle() {
         return longTitle;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 }
